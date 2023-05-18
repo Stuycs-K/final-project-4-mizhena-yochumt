@@ -1,10 +1,11 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Aiden Mizhen
 
-### date x
+### 05/18/23
 
-info
+Researched Enigma machine, rewatched perusal video, planned out project 
+layout.
 
 ### date y
 

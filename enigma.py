@@ -77,7 +77,9 @@ def rotor(input, r1, r2, r3, setting, ref):
   r3 -= 1
   ref -= 1
   for letter in input:
-    print("Starting rotation of " + letter)
+    if not letter.isalpha():
+      out += letter
+      continue
     if (setting[2] in turnover[r3]):
       setting[1] = shift(setting[1], 'B')
     
@@ -89,44 +91,35 @@ def rotor(input, r1, r2, r3, setting, ref):
     letter = shift(letter, setting[2])
     letter = rotate(r3, letter)
     letter = shift_reverse(letter, setting[2])
-    print(letter)
 
     letter = shift(letter, setting[1])
     letter = rotate(r2, letter)
     letter = shift_reverse(letter, setting[1])
 
-    print(letter)
-
     letter = shift(letter, setting[0])
     letter = rotate(r1, letter)
     letter = shift_reverse(letter, setting[0])
-    print(letter)
 
     letter = reflect(ref, letter)
-    print(letter)
 
     letter = shift(letter, setting[0])
     letter = rotate_reverse(r1, letter)
     letter = shift_reverse(letter, setting[0])
-    print(letter)
 
     letter = shift(letter, setting[1])
     letter = rotate_reverse(r2, letter)
     letter = shift_reverse(letter, setting[1])
-    print(letter)
 
     letter = shift(letter, setting[2])
     letter = rotate_reverse(r3, letter)
     letter = shift_reverse(letter, setting[2])
-    print(letter)
 
     out += letter
-  print(out)
   return out
 
-setting = ['A', 'A', 'Z']
+setting = ['A', 'A', 'A']
 
-message = "Test"
+message = "The Quick Brown fox jumped over the lazy dog".upper()
 
 # message = plugs(message, plugboard)
 

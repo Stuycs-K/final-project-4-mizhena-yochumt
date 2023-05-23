@@ -13,14 +13,14 @@ layout.
 * Found internal rotor configuration, using rotors 1-8 (4th wikipedia category): https://en.wikipedia.org/wiki/Enigma_rotor_details
 * Layed out knowns, and unknowns
 * Initialized rotor pre-sets (Theo should copy for enigma)
-* 
+* Cr
 
 
 ## GROUP MEMBER 2
 
-### date x
+### 05/23/23
 
-info
+* Made a semi-functional enigma, the rotor works on a few letters in sequence
 
 ### date y
 

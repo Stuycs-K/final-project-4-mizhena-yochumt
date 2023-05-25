@@ -28,7 +28,7 @@ reflectors = [
   [*'FVPJIAOYEDRZXWGCTKUQSBNMHL']
 ]
 # A set of plugs is represented as a string i.e. "AQ"
-plugboard = ['AD']
+plugboard = ['WS', 'RX', 'FH', 'VO']
 
 def plugs(input, plugs):
   input = input.upper()
@@ -80,11 +80,7 @@ def rotor(input, r1, r2, r3, setting, ref):
     if not letter.isalpha():
       out += letter
       continue
-<<<<<<< HEAD
-    if (setting[2] in turnover[r3] and setting[1] in turnover[r2]):
-=======
     if (setting[2] in turnover[r3] or setting[1] in turnover[r2]):
->>>>>>> 6a1c404d3d2d9404f9663f8229d435d55493694c
       setting[1] = shift(setting[1], 'B')
 
     if (setting[1] in turnover[r2]):
@@ -92,7 +88,7 @@ def rotor(input, r1, r2, r3, setting, ref):
 
     setting[2] = shift(setting[2], 'B')
 
-    print(f'\n{setting[0]} {setting[1]} {setting[2]}')
+    # print(f'\n{setting[0]} {setting[1]} {setting[2]}')
 
     letter = shift(letter, setting[2])
     letter = rotate(r3, letter)
@@ -132,17 +128,11 @@ def rotor(input, r1, r2, r3, setting, ref):
 
 setting = ['D', 'D', 'S']
 
-message = "ABCDEFGHIJKLMNOP".upper()
+message = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ".upper()
 
-# message = plugs(message, plugboard)
+out = plugs(message, plugboard)
 
-# for i in range(0, 26):
-#     print(f'D reverse shifted by {i} = {shift_reverse("D", chr(ord("A") + i))}')
-#
-# for i in range(0, 26):
-#     print(f'D shifted by {i} = {shift("D", chr(ord("A") + i))}')
+out = rotor(out, 4,2,3, setting, 2)
 
-out = rotor(message, 4,2,3, setting, 2)
+out = plugs(out, plugboard)
 print(out)
-
-# message = plugs(message, plugboard)

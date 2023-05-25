@@ -80,7 +80,7 @@ def rotor(input, r1, r2, r3, setting, ref):
     if not letter.isalpha():
       out += letter
       continue
-    if (setting[2] in turnover[r3]):
+    if (setting[2] in turnover[r3] or setting[1] in turnover[r2]):
       setting[1] = shift(setting[1], 'B')
     
     if (setting[1] in turnover[r2]):

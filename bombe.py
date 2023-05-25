@@ -42,32 +42,21 @@ encoded = [ord(c) - 65 for c in encoded]
 for s1 in range(26):
     for s2 in range(26):
         for s3 in range(26):
+            # Test each char
+            for c in range(len(known)):
+                given_in = known[c]
+                given_out = encoded[c]
+                s1 += 1
+                s1 %= 26
+                if s1 == 25:
+                    s2 += 1
+                    if s2 == 25:
+                        s3 += 1
 
-            # Plugboard guess
-            for p in range(26):
-                used_plugs = set()
-                # Test each char
-                for c in range(len(known)):
-                    given_in = known[c]
-                    given_out = encoded[c]
-                    used_plugs.add((p, given_in))
-                    s1 += 1
-                    s1 %= 26
-                    if s1 == 25:
-                        s2 += 1
-                        if s2 == 25:
-                            s3 += 1
-
-                    e0 = rotors[0][(s1 + p) % 26]
-                    e1 = rotors[1][(s2 + e0) % 26]
-                    e2 = rotors[2][(s3 + e1) % 26]
-                    r = reflectors[0][e2]
-                    e3 = rotors[2][(s3 + r) % 26]
-                    e4 = rotors[1][(s2 + e3) % 26]
-                    e5 = rotors[0][(s1 + e4) % 26]
-                    # out now maps to known character in encoded text via plugboard
-                    if (e5, given_out) not in used_plugs and (given_out, e5) not in used_plugs:
-                        used_plugs.add((e5, given_out))
-                    else:
-                        # Contradiction, try new initial plug
-                        break
+                e0 = rotors[0][(s1 + given_in) % 26]-s1
+                e1 = rotors[1][(s2 + e0) % 26]-s2
+                e2 = rotors[2][(s3 + e1) % 26]-s3
+                r = reflectors[0][e2]
+                e3 = rotors[2][(s3 + r) % 26] - s3
+                e4 = rotors[1][(s2 + e3) % 26] - s2
+                e5 = rotors[0][(s1 + e4) % 26] - s1

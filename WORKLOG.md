@@ -13,7 +13,12 @@ layout.
 * Found internal rotor configuration, using rotors 1-8 (4th wikipedia category): https://en.wikipedia.org/wiki/Enigma_rotor_details
 * Layed out knowns, and unknowns
 * Initialized rotor pre-sets (Theo should copy for enigma)
-* Cr
+
+### 05/24/23
+
+* Changed the way rotors were stored to be easier to use
+* Started work on main bashing loop
+* Still need to use turing's efficiency thing for not checking bad plugs twice
 
 
 ## GROUP MEMBER 2

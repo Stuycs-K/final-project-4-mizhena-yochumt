@@ -20,6 +20,10 @@ layout.
 * Started work on main bashing loop
 * Still need to use turing's efficiency thing for not checking bad plugs twice
 
+### 05/29/23
+
+* Got encryption/decryption algorithm working
+* Started real work on cracker
 
 ## GROUP MEMBER 2
 

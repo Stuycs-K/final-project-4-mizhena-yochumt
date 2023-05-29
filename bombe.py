@@ -44,6 +44,30 @@ turn1 = ord('Q')-65
 turn2 = ord('E')-65
 
 
+turn1 = ord('Q')-65
+turn2 = ord('E')-65
+s0, s1, s2 = 0, 0, 0
+for c in range(len(known)):
+    given_in = known[c]
+    given_out = encoded[c]
+    s0 += 1
+    s0 %= 26
+    if s0 == turn1:
+        s1 += 1
+        s1 %= 26
+        if s1 == turn2:
+            s2 += 1
+            s2 %= 26
+
+    e0 = rotors[2][(s0 + given_in) % 26] - s0
+    e1 = rotors[1][(s1 + e0) % 26] - s1
+    e2 = rotors[0][(s2 + e1) % 26] - s2
+    r = reflectors[1][e2 % 26]
+    e3 = rotors[0][(s2 + r) % 26] - s2
+    e4 = rotors[1][(s1 + e3) % 26] - s1
+    e5 = (rotors[2][(s0 + e4) % 26] - s0) % 26
+    print(chr(e5+65), chr(65+given_out))
+
 # for s1 in range(26):
 #     for s2 in range(26):
 #         for s3 in range(26):
@@ -71,28 +95,3 @@ turn2 = ord('E')-65
 #                 elif c == len(known)-1:
 #                     print(s1, s2, s3)
 #                     exit()
-
-
-turn1 = ord('Q')-65
-turn2 = ord('E')-65
-s0, s1, s2 = 0, 0, 0
-for c in range(len(known)):
-    given_in = known[c]
-    given_out = encoded[c]
-    s0 += 1
-    s0 %= 26
-    if s0 == turn1:
-        s1 += 1
-        s1 %= 26
-        if s1 == turn2:
-            s2 += 1
-            s2 %= 26
-
-    e0 = rotors[2][(s0 + given_in) % 26] - s0
-    e1 = rotors[1][(s1 + e0) % 26] - s1
-    e2 = rotors[0][(s2 + e1) % 26] - s2
-    r = reflectors[1][e2]
-    e3 = rotors[0][(s2 + r) % 26] - s2
-    e4 = rotors[1][(s1 + e3) % 26] - s1
-    e5 = (rotors[2][(s0 + e4) % 26] - s0) % 26
-    print(e5, given_out)

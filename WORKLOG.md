@@ -24,6 +24,8 @@ layout.
 
 * Got encryption/decryption algorithm working
 * Started real work on cracker
+* Wrote talking notes
+* Created the HW 
 
 ## GROUP MEMBER 2
 

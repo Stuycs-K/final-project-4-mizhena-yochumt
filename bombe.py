@@ -1,7 +1,7 @@
 
-known = 'HEILKONSTANTINOVICH'
+known = 'HEILKONSTANTINOVICHHELLOWORLD'
 # For testing encoded with initial AAA, rotors 1, 2, 3, turnover
-encoded = 'ILGDVKRFHTEERSNOYYJ'
+encoded = 'ILGDVKRFHTEERSNOYYJQYBSABVSON'
 
 '''
 Known
@@ -35,38 +35,65 @@ reflectors = [
   [ord(c) - 65 for c in 'FVPJIAOYEDRZXWGCTKUQSBNMHL']
 ]
 
+turnover = [
+  'Q',
+  'E',
+  'V',
+  'J',
+  'Z',
+  'ZM',
+  'ZM',
+  'ZM'
+  ]
 
 known = [ord(c) - 65 for c in known]
 encoded = [ord(c) - 65 for c in encoded]
+# print(reflectors[1])
+
+t1 = (ord('V') - 65 + 1) % 26
+t2 = (ord('E') - 65) % 26
 
 
-turn1 = ord('Q')-65
-turn2 = ord('E')-65
 
+s0, s1, s2 = 0, 0, 0 # Starting position
+r0, r1, r2 = 2, 1, 0 #
+rf = 1
 
-turn1 = ord('Q')-65
-turn2 = ord('E')-65
-s0, s1, s2 = 0, 0, 0
+t1 = turnover[r0]
+t2 = turnover[r1]
+
+mv_2 = False
 for c in range(len(known)):
     given_in = known[c]
     given_out = encoded[c]
     s0 += 1
     s0 %= 26
-    if s0 == turn1:
+    if s0 == t1:
         s1 += 1
         s1 %= 26
-        if s1 == turn2:
-            s2 += 1
-            s2 %= 26
+        if s1 == t2:
+            mv_2 = True
+    if mv_2:
+        s1 += 1
+        s2 += 1
+        mv_2 = False
 
-    e0 = rotors[2][(s0 + given_in) % 26] - s0
-    e1 = rotors[1][(s1 + e0) % 26] - s1
-    e2 = rotors[0][(s2 + e1) % 26] - s2
-    r = reflectors[1][e2 % 26]
-    e3 = rotors[0][(s2 + r) % 26] - s2
-    e4 = rotors[1][(s1 + e3) % 26] - s1
-    e5 = (rotors[2][(s0 + e4) % 26] - s0) % 26
-    print(chr(e5+65), chr(65+given_out))
+    e0 = (rotors[r0][(s0 + given_in) % 26] - s0) % 26
+    e1 = (rotors[r1][(s1 + e0) % 26] - s1)%26
+    e2 = (rotors[r2][(s2 + e1) % 26] - s2)%26
+    # print(chr(e2+65+s2))
+    r = reflectors[rf][e2 % 26]
+    # print(r)
+    e3 = (rotors[r2].index((s2 + r) % 26) - s2)%26
+    # print(chr(e2+65-s2))
+    e4 = (rotors[r1].index((s1 + e3) % 26) - s1)%26
+    e5 = (rotors[r0].index((s0 + e4) % 26) - s0) % 26
+
+    # print(chr(given_in+65), s2, s1, s0)
+    # print(''.join([chr(i+65) for i in [e0, e1, e2, r, e3, e4, e5]]))
+    print(chr(e5+65), chr(given_out+65))
+
+
 
 # for s1 in range(26):
 #     for s2 in range(26):
@@ -77,9 +104,9 @@ for c in range(len(known)):
 #                 given_out = encoded[c]
 #                 s1 += 1
 #                 s1 %= 26
-#                 if s1 == turn1:
+#                 if s1 == t1:
 #                     s2 += 1
-#                     if s2 == turn2:
+#                     if s2 == t2:
 #                         s3 += 1
 #
 #                 e0 = rotors[2][(s1 + given_in) % 26]-s1

@@ -28,7 +28,7 @@ reflectors = [
   [*'FVPJIAOYEDRZXWGCTKUQSBNMHL']
 ]
 # A set of plugs is represented as a string i.e. "AQ"
-plugboard = ['WS', 'RX', 'FH', 'VO']
+plugboard = ['AQ', 'CS', 'FG']
 
 def plugs(input, plugs):
   input = input.upper()
@@ -88,51 +88,42 @@ def rotor(input, r1, r2, r3, setting, ref):
 
     setting[2] = shift(setting[2], 'B')
 
-    # print(f'\n{setting[0]} {setting[1]} {setting[2]}')
-
     letter = shift(letter, setting[2])
     letter = rotate(r3, letter)
     letter = shift_reverse(letter, setting[2])
-    # print(f'Wheel 3: {letter}')
 
     letter = shift(letter, setting[1])
     letter = rotate(r2, letter)
     letter = shift_reverse(letter, setting[1])
-    # print(f'Wheel 2: {letter}')
 
     letter = shift(letter, setting[0])
     letter = rotate(r1, letter)
     letter = shift_reverse(letter, setting[0])
-    # print(f'Wheel 1: {letter}')
 
     letter = reflect(ref, letter)
-    # print(f'Reflector: {letter}')
 
     letter = shift(letter, setting[0])
     letter = rotate_reverse(r1, letter)
     letter = shift_reverse(letter, setting[0])
-    # print(f'Wheel 1: {letter}')
 
     letter = shift(letter, setting[1])
     letter = rotate_reverse(r2, letter)
     letter = shift_reverse(letter, setting[1])
-    # print(f'Wheel 2: {letter}')
 
     letter = shift(letter, setting[2])
     letter = rotate_reverse(r3, letter)
     letter = shift_reverse(letter, setting[2])
-    # print(f'Wheel 3: {letter}')
 
     out += letter
   return out
 
-setting = ['D', 'D', 'S']
+setting = ['A', 'A', 'A']
 
-message = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ".upper()
+message = "HEILKONSTANTINOVICH".upper()
 
 out = plugs(message, plugboard)
 
-out = rotor(out, 4,2,3, setting, 2)
+out = rotor(out, 1,2,3, setting, 2)
 
 out = plugs(out, plugboard)
 print(out)

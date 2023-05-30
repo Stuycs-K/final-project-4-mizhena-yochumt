@@ -271,7 +271,7 @@ def drawPlugs(plugs, let1, let2, x, y):
         strokeWeight(1)
 
 setting = ['D', 'D', 'S']
-message = 'Testes'.upper()
+message = 'HELLOWORLD'.upper()
 plug_config = ['AG', 'XY', 'CD', 'LJ']
 rotor_config = [4,2,3]
 reflector_config = 2
